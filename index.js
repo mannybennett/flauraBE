@@ -7,6 +7,7 @@ const port = process.env.PORT || 4000;
 const usersRouter = require('./routers/users');
 const authRouter = require('./routers/auth');
 const ordersRouter = require('./routers/orders');
+const itemsRouter = require('./routers/items');
 
 app.use(cors({
   origin: 'http://localhost:4000',
@@ -25,5 +26,6 @@ app.use(session({
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/orders', ordersRouter);
+app.use('/api/items', itemsRouter);
 
 app.listen(port, () => console.log('Listening on:', port));
