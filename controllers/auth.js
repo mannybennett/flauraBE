@@ -15,7 +15,7 @@ const login = async (req, res) => {
     const user = rows[0];
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      // Login successful (handle successful login logic here)
+      req.session.user = { id: user.id };
       return res.json({ message: "Login successful" });
     } else {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -26,7 +26,22 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  if (req.session && req.session.user) {
+    // destroy session
+    req.session.destroy(function(err) {
+      if(err) {
+        return res.json({ message: 'Logout failed' });
+      } else {
+        return res.json({ message: 'Logout successful' });
+      };
+    });
+  } else {
+    return res.json({ message: 'No user to log out' });
+  };
+};
 
 module.exports = {
-  login
+  login,
+  logout
 };
