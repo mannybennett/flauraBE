@@ -8,6 +8,7 @@ const usersRouter = require('./routers/users');
 const authRouter = require('./routers/auth');
 const ordersRouter = require('./routers/orders');
 const itemsRouter = require('./routers/items');
+const plantsRouter = require('./routers/plants');
 
 app.use(cors({
   origin: 'http://localhost:4000',
@@ -27,5 +28,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/items', itemsRouter);
+app.use('/api/plants', plantsRouter);
 
 app.listen(port, () => console.log('Listening on:', port));
